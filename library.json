@@ -1,0 +1,37 @@
+{
+  "name": "SBK_MAX72xx",
+  "version": "1.0.0",
+  "description": "MAX7219/MAX7221 LED matrix driver with software and hardware SPI support.",
+  "keywords": [
+    "led",
+    "matrix",
+    "max7219",
+    "max7221",
+    "display",
+    "bargraph",
+    "spi",
+    "arduino"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sbarabe/SBK_MAX72xx"
+  },
+  "authors": [
+    {
+      "name": "Samuel Barabé",
+      "email": "smartbuildskits@gmail.com",
+      "maintainer": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/sbarabe/SBK_MAX72xx",
+  "frameworks": ["arduino"],
+  "platforms": ["atmelavr", "espressif8266", "espressif32", "ststm32"],
+  "headers": [
+    "SBK_MAX72xxSoft.h",
+    "SBK_MAX72xxHard.h"
+  ],
+  "examples": [
+    "examples/simpleDemo/simpleDemo.ino"
+  ]
+}
