@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['_7esbk_5fmax72xxhard_0',['~SBK_MAX72xxHard',['../class_s_b_k___m_a_x72xx_hard.html#aea7a7ebddb5334b57383fbd85eb3fc51',1,'SBK_MAX72xxHard']]],
-  ['_7esbk_5fmax72xxsoft_1',['~SBK_MAX72xxSoft',['../class_s_b_k___m_a_x72xx_soft.html#a29d2de6525d7816dd15271d48c4db27a',1,'SBK_MAX72xxSoft']]]
+  ['maxcolumns_0',['maxColumns',['../class_s_b_k___m_a_x72xx_hard.html#aa4f875e68c5215f3b408f84730f5721c',1,'SBK_MAX72xxHard::maxColumns()'],['../class_s_b_k___m_a_x72xx_soft.html#a50f31d36de1762dcea7e6a0fe932f5b7',1,'SBK_MAX72xxSoft::maxColumns()']]],
+  ['maxrows_1',['maxRows',['../class_s_b_k___m_a_x72xx_hard.html#aaa22b94a832f5a714279124b02a5b594',1,'SBK_MAX72xxHard::maxRows()'],['../class_s_b_k___m_a_x72xx_soft.html#a609ed97e74532c1545f7232d14b01ea1',1,'SBK_MAX72xxSoft::maxRows()']]],
+  ['maxsegments_2',['maxSegments',['../class_s_b_k___m_a_x72xx_hard.html#a9903340585bccfa3a34b0e5a839ee288',1,'SBK_MAX72xxHard::maxSegments()'],['../class_s_b_k___m_a_x72xx_soft.html#a7008f00653f3619334291dda4ce760f2',1,'SBK_MAX72xxSoft::maxSegments()']]]
 ];

@@ -11,7 +11,7 @@
  * @author
  * Samuel Barabé (Smart Builds & Kits)
  *
- * @version 1.0.0
+ * @version 2.0.0
  *
  * @license MIT
  *
@@ -36,12 +36,16 @@
 #define OP_SHUTDOWN 0x0C
 #define OP_DISPLAYTEST 0x0F
 
-SBK_MAX72xxHard::SBK_MAX72xxHard(uint8_t csPin, uint8_t numDevices)
-    : _dataPin(0), _clkPin(0), _csPin(csPin), _numDevices(numDevices)
+SBK_MAX72xxHard::SBK_MAX72xxHard(uint8_t csPin,
+                                 uint8_t devsNum)
+    : _dataPin(0),
+      _clkPin(0),
+      _csPin(csPin),
+      _devsNum(constrain(devsNum, 1, 8))
 {
-    _buffer = new uint8_t[_numDevices * 8];
-    _update = new bool[_numDevices]();
-    memset(_buffer, 0, _numDevices * 8);
+    _buffer = new uint8_t[_devsNum * _defaultColBufferSize];
+    _update = new bool[_devsNum]();
+    memset(_buffer, 0, _devsNum * _defaultColBufferSize);
 }
 
 void SBK_MAX72xxHard::setSPIClock(uint32_t frequency)
@@ -68,129 +72,145 @@ void SBK_MAX72xxHard::begin()
 
     SPI.begin();
     SPI.beginTransaction(SPISettings(_spiClock, MSBFIRST, SPI_MODE0)); // You can tune speed
-    for (uint8_t i = 0; i < _numDevices; ++i)
+    for (uint8_t i = 0; i < _devsNum; ++i)
     {
-        setShutdown(i, false);            // Wake up
-        setScanLimit(i, 7);               // Display all 8 digits
-        spiTransfer(i, OP_DECODEMODE, 0); // No decode
-        clear(i);                         // Clear display
-        setBrightness(i, 8);              // Medium brightness
+        setShutdown(i, false);             // Wake up
+        setScanLimit(i, maxColumns() - 1); // Display all 8 digits
+        _spiTransfer(i, OP_DECODEMODE, 0); // No decode
+        clear(i);                          // Clear display
+        setBrightness(i, 8);               // Medium brightness
     }
     SPI.endTransaction(); // 💡 Restores SPI state for other users
 }
 
-void SBK_MAX72xxHard::setShutdown(uint8_t device, bool status)
+void SBK_MAX72xxHard::setShutdown(uint8_t devIdx, bool status)
 {
-    spiTransfer(device, OP_SHUTDOWN, status ? 0 : 1);
+    _spiTransfer(devIdx, OP_SHUTDOWN, status ? 0 : 1);
 }
 
-void SBK_MAX72xxHard::setScanLimit(uint8_t device, uint8_t limit)
+void SBK_MAX72xxHard::setScanLimit(uint8_t devIdx, uint8_t limit)
 {
-    spiTransfer(device, OP_SCANLIMIT, limit & 0x07);
+    _spiTransfer(devIdx, OP_SCANLIMIT, limit & 0x07);
 }
 
-void SBK_MAX72xxHard::setBrightness(uint8_t device, uint8_t brightness)
+void SBK_MAX72xxHard::setBrightness(uint8_t devIdx, uint8_t brightness)
 {
-    spiTransfer(device, OP_INTENSITY, brightness & 0x0F);
+    // constrain the brightness to a 4-bit number (0–15)
+    brightness &= 0x0F; // limit to 0–15
+
+    _spiTransfer(devIdx, OP_INTENSITY, brightness & 0x0F);
 }
 
-void SBK_MAX72xxHard::clear(uint8_t device)
+void SBK_MAX72xxHard::clear(uint8_t devIdx)
 {
-    if (device >= _numDevices)
+    if (devIdx >= _devsNum)
         return;
 
-    for (uint8_t row = 0; row < 8; row++)
+    _update[devIdx] = true; // Mark this device for update
+
+    for (uint8_t colIdx = 0; colIdx < maxColumns(); colIdx++)
     {
-        _buffer[device * 8 + row] = 0x00;
-        _update[device] = true; // Mark this device for update
-        spiTransfer(device, OP_DIGIT0 + row, 0x00);
+        _buffer[_colIndex(devIdx, colIdx)] = 0x00;
+        _spiTransfer(devIdx, OP_DIGIT0 + colIdx, 0x00);
     }
 }
 
 void SBK_MAX72xxHard::clear()
 {
-    for (uint8_t d = 0; d < _numDevices; d++)
+    for (uint8_t d = 0; d < _devsNum; d++)
     {
         clear(d);
     }
 }
 
-void SBK_MAX72xxHard::setLed(uint8_t device, uint8_t row, uint8_t col, bool state)
+void SBK_MAX72xxHard::setLed(uint8_t devIdx, uint8_t rowIdx, uint8_t colIdx, bool state)
 {
-    if (device >= _numDevices || row > 7 || col > 7)
+    if (devIdx >= _devsNum || rowIdx >= maxRows(devIdx) || colIdx >= maxColumns())
         return;
 
-    uint8_t &val = _buffer[device * 8 + row];
+    uint8_t &val = _buffer[_colIndex(devIdx, colIdx)];
     uint8_t prior = val;
 
     if (state)
-        val |= (1 << (7 - col));
+        val |= _bitMaskRow(devIdx, rowIdx);
     else
-        val &= ~(1 << (7 - col));
+        val &= ~_bitMaskRow(devIdx, rowIdx);
 
     if (val != prior)
-        _update[device] = true;
+        _update[devIdx] = true;
+
+    Serial.print("[setLed] Dev: ");
+    Serial.print(devIdx);
+    Serial.print(" Row: ");
+    Serial.print(rowIdx);
+    Serial.print(" Col: ");
+    Serial.print(colIdx);
+    Serial.print(" State: ");
+    Serial.println(state ? "ON" : "OFF");
 }
 
-bool SBK_MAX72xxHard::getLed(uint8_t device, uint8_t row, uint8_t col) const
+bool SBK_MAX72xxHard::getLed(uint8_t devIdx, uint8_t rowIdx, uint8_t colIdx) const
 {
-    if (device >= _numDevices || row > 7 || col > 7)
+    if (devIdx >= _devsNum || rowIdx >= maxRows(devIdx) || colIdx >= maxColumns())
         return false;
 
-    return (_buffer[device * 8 + row] >> (7 - col)) & 0x01;
+    return (_buffer[_colIndex(devIdx, colIdx)] & _bitMaskRow(devIdx, rowIdx)) != 0;
 }
 
-void SBK_MAX72xxHard::setRow(uint8_t device, uint8_t row, uint8_t value)
+void SBK_MAX72xxHard::setCol(uint8_t devIdx, uint8_t colIdx, uint8_t value)
 {
-    if (device >= _numDevices || row > 7)
+    if (devIdx >= _devsNum || colIdx >= maxColumns())
         return;
 
-    if (_buffer[device * 8 + row] != value)
+    if (_buffer[_colIndex(devIdx, colIdx)] != value)
     {
-        _buffer[device * 8 + row] = value;
-        _update[device] = true; // Mark device for update
+        _buffer[_colIndex(devIdx, colIdx)] = value;
+        _update[devIdx] = true; // Mark device for update
     }
 }
 
 void SBK_MAX72xxHard::show()
 {
     SPI.beginTransaction(SPISettings(_spiClock, MSBFIRST, SPI_MODE0));
-    for (uint8_t d = 0; d < _numDevices; d++)
+    for (uint8_t devIdx = 0; devIdx < _devsNum; devIdx++)
     {
-        if (_update[d])
+        if (_update[devIdx])
         {
-            for (uint8_t row = 0; row < 8; row++)
+            for (uint8_t colIdx = 0; colIdx < maxColumns(); colIdx++)
             {
-                _writeRowToAllDevices(d, row, _buffer[d * 8 + row]);
+                _writeColToAllDevices(devIdx, colIdx, _buffer[_colIndex(devIdx, colIdx)]);
             }
-            _update[d] = false;
+            _update[devIdx] = false;
         }
     }
     SPI.endTransaction(); // 💡 Restores SPI state for other users
 }
 
-void SBK_MAX72xxHard::show(uint8_t device)
+void SBK_MAX72xxHard::show(uint8_t devIdx)
 {
     SPI.beginTransaction(SPISettings(_spiClock, MSBFIRST, SPI_MODE0));
-    if (device >= _numDevices || !_update[device])
+    if (devIdx >= _devsNum || !_update[devIdx])
         return;
 
-    for (uint8_t row = 0; row < 8; row++)
+    for (uint8_t colIdx = 0; colIdx < maxColumns(); colIdx++)
     {
-        _writeRowToAllDevices(device, row, _buffer[device * 8 + row]);
+        _writeColToAllDevices(devIdx, colIdx, _buffer[_colIndex(devIdx, colIdx)]);
     }
-    _update[device] = false;
+    _update[devIdx] = false;
     SPI.endTransaction(); // 💡 Restores SPI state for other users
 }
 
-void SBK_MAX72xxHard::spiTransfer(uint8_t targetDevice, uint8_t opcode, uint8_t data)
+void SBK_MAX72xxHard::_spiTransfer(uint8_t targetDevice, uint8_t opcode, uint8_t data)
 {
+    if (targetDevice >= _devsNum)
+        return; // Prevent invalid access
+
     digitalWrite(_csPin, LOW);
 
-    for (int8_t i = _numDevices - 1; i >= 0; i--)
+    for (int8_t i = _devsNum - 1; i >= 0; i--)
     {
-        uint8_t op = (i == targetDevice) ? opcode : OP_NOOP;
-        uint8_t val = (i == targetDevice) ? data : 0;
+        uint8_t op = (i == static_cast<int8_t>(targetDevice)) ? opcode : OP_NOOP;
+        uint8_t val = (i == static_cast<int8_t>(targetDevice)) ? data : 0;
 
         SPI.transfer(op);
         SPI.transfer(val);
@@ -199,18 +219,31 @@ void SBK_MAX72xxHard::spiTransfer(uint8_t targetDevice, uint8_t opcode, uint8_t 
     digitalWrite(_csPin, HIGH);
 }
 
-inline void SBK_MAX72xxHard::_writeRowToAllDevices(uint8_t targetDevice, uint8_t row, uint8_t data)
+inline void SBK_MAX72xxHard::_writeColToAllDevices(uint8_t targetDevice, uint8_t colIdx, uint8_t data)
 {
+    if (targetDevice >= _devsNum || colIdx >= maxColumns())
+        return;
+
     digitalWrite(_csPin, LOW);
 
-    for (int8_t i = _numDevices - 1; i >= 0; i--)
+    for (int8_t i = _devsNum - 1; i >= 0; i--)
     {
-        uint8_t opcode = (i == targetDevice) ? (OP_DIGIT0 + row) : OP_NOOP;
-        uint8_t val = (i == targetDevice) ? data : 0;
+        uint8_t opcode = (i == static_cast<int8_t>(targetDevice)) ? (OP_DIGIT0 + colIdx) : OP_NOOP;
+        uint8_t val = (i == static_cast<int8_t>(targetDevice)) ? data : 0;
 
         SPI.transfer(opcode);
         SPI.transfer(val);
     }
 
     digitalWrite(_csPin, HIGH);
+}
+
+inline uint8_t SBK_MAX72xxHard::_bitMaskRow(uint8_t devIdx, uint8_t rowIdx) const
+{
+    return 1 << ((maxRows(devIdx) - 1) - rowIdx);
+}
+
+inline uint8_t SBK_MAX72xxHard::_colIndex(uint8_t devIdx, uint8_t colIdx) const
+{
+    return devIdx * _defaultColBufferSize + colIdx;
 }

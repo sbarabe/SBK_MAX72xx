@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SBK_MAX72xx library<span id="projectnumber">&#160;1.0.0</span>
+   <div id="projectname">SBK_MAX72xx library<span id="projectnumber">&#160;2.0.0</span>
    </div>
    <div id="projectbrief">Low-level driver for controlling multiple MAX7219/MAX7221 LED matrix chips via software SPI.</div>
   </td>
@@ -100,39 +100,46 @@ $(function(){initNavTree('class_s_b_k___m_a_x72xx_soft.html','','class_s_b_k___m
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab4da57b10e5240492cc0ee24dcd6b89a" id="r_ab4da57b10e5240492cc0ee24dcd6b89a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab4da57b10e5240492cc0ee24dcd6b89a">SBK_MAX72xxSoft</a> (uint8_t dataPin, uint8_t clkPin, uint8_t csPin, uint8_t numDevices=1)</td></tr>
-<tr class="memdesc:ab4da57b10e5240492cc0ee24dcd6b89a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Software SPI <a class="el" href="class_s_b_k___m_a_x72xx_soft.html" title="Controls multiple MAX7219/MAX7221 LED drivers via software SPI.">SBK_MAX72xxSoft</a> object.  <br /></td></tr>
+<tr class="memitem:a639dd8485fff8b0b57d432ea842c656f" id="r_a639dd8485fff8b0b57d432ea842c656f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a639dd8485fff8b0b57d432ea842c656f">SBK_MAX72xxSoft</a> (uint8_t dataPin, uint8_t clkPin, uint8_t csPin, uint8_t <a class="el" href="#a161200948b6eaa69271424dd9b5d0640">devsNum</a>=1)</td></tr>
+<tr class="memdesc:a639dd8485fff8b0b57d432ea842c656f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Software SPI <a class="el" href="class_s_b_k___m_a_x72xx_soft.html" title="Controls multiple MAX7219/MAX7221 LED drivers via software SPI.">SBK_MAX72xxSoft</a> object.  <br /></td></tr>
+<tr class="memitem:a609ed97e74532c1545f7232d14b01ea1" id="r_a609ed97e74532c1545f7232d14b01ea1"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a609ed97e74532c1545f7232d14b01ea1">maxRows</a> (uint8_t devIdx=0) const</td></tr>
+<tr class="memdesc:a609ed97e74532c1545f7232d14b01ea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of addressable row lines (anode outputs = SEGx).  <br /></td></tr>
+<tr class="memitem:a50f31d36de1762dcea7e6a0fe932f5b7" id="r_a50f31d36de1762dcea7e6a0fe932f5b7"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a50f31d36de1762dcea7e6a0fe932f5b7">maxColumns</a> () const</td></tr>
+<tr class="memdesc:a50f31d36de1762dcea7e6a0fe932f5b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of addressable columns (cathode outputs = DIGx).  <br /></td></tr>
+<tr class="memitem:a7008f00653f3619334291dda4ce760f2" id="r_a7008f00653f3619334291dda4ce760f2"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7008f00653f3619334291dda4ce760f2">maxSegments</a> (uint8_t devIdx=0) const</td></tr>
+<tr class="memdesc:a7008f00653f3619334291dda4ce760f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the total number of addressable LED segments for this device.  <br /></td></tr>
 <tr class="memitem:a0c3cdc90f3f6cd9f840b7e9df3b1762e" id="r_a0c3cdc90f3f6cd9f840b7e9df3b1762e"><td class="memItemLeft" align="right" valign="top"><a id="a0c3cdc90f3f6cd9f840b7e9df3b1762e" name="a0c3cdc90f3f6cd9f840b7e9df3b1762e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
 <tr class="memdesc:a0c3cdc90f3f6cd9f840b7e9df3b1762e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize SPI pins and all MAX72xx chips. <br /></td></tr>
-<tr class="memitem:ab4d05c43588457d164fe3a589f155ad2" id="r_ab4d05c43588457d164fe3a589f155ad2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab4d05c43588457d164fe3a589f155ad2">setShutdown</a> (uint8_t device, bool status)</td></tr>
-<tr class="memdesc:ab4d05c43588457d164fe3a589f155ad2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable shutdown mode on a specific device.  <br /></td></tr>
-<tr class="memitem:a06f97a77c4d959033153060a57d5f2eb" id="r_a06f97a77c4d959033153060a57d5f2eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a06f97a77c4d959033153060a57d5f2eb">setScanLimit</a> (uint8_t device, uint8_t limit)</td></tr>
-<tr class="memdesc:a06f97a77c4d959033153060a57d5f2eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the scan limit (number of active digits) for a specific device.  <br /></td></tr>
-<tr class="memitem:ad95f648d9e66e841f0e8ccd9e0fc3e28" id="r_ad95f648d9e66e841f0e8ccd9e0fc3e28"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad95f648d9e66e841f0e8ccd9e0fc3e28">setBrightness</a> (uint8_t device, uint8_t brightness)</td></tr>
-<tr class="memdesc:ad95f648d9e66e841f0e8ccd9e0fc3e28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set display brightness for a specific device.  <br /></td></tr>
-<tr class="memitem:aca55682cec0b07bfa7fc9c5ec6c42ec9" id="r_aca55682cec0b07bfa7fc9c5ec6c42ec9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca55682cec0b07bfa7fc9c5ec6c42ec9">clear</a> (uint8_t device)</td></tr>
-<tr class="memdesc:aca55682cec0b07bfa7fc9c5ec6c42ec9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear display buffer and hardware for one device.  <br /></td></tr>
+<tr class="memitem:a56ba9d7961fae9aac1f90e93219437ff" id="r_a56ba9d7961fae9aac1f90e93219437ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a56ba9d7961fae9aac1f90e93219437ff">setShutdown</a> (uint8_t devIdx, bool status)</td></tr>
+<tr class="memdesc:a56ba9d7961fae9aac1f90e93219437ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable shutdown mode on a specific device.  <br /></td></tr>
+<tr class="memitem:ab7ee1b7ff3551f1eb4380b8f6f7aefca" id="r_ab7ee1b7ff3551f1eb4380b8f6f7aefca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7ee1b7ff3551f1eb4380b8f6f7aefca">setScanLimit</a> (uint8_t devIdx, uint8_t limit)</td></tr>
+<tr class="memdesc:ab7ee1b7ff3551f1eb4380b8f6f7aefca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the scan limit (number of active digits) for a specific device.  <br /></td></tr>
+<tr class="memitem:a72b7191d6728f64ac314ec1bf6e619b6" id="r_a72b7191d6728f64ac314ec1bf6e619b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72b7191d6728f64ac314ec1bf6e619b6">setBrightness</a> (uint8_t devIdx, uint8_t brightness)</td></tr>
+<tr class="memdesc:a72b7191d6728f64ac314ec1bf6e619b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set display brightness for a specific device.  <br /></td></tr>
+<tr class="memitem:a161200948b6eaa69271424dd9b5d0640" id="r_a161200948b6eaa69271424dd9b5d0640"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a161200948b6eaa69271424dd9b5d0640">devsNum</a> () const</td></tr>
+<tr class="memdesc:a161200948b6eaa69271424dd9b5d0640"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of actives driver devices.  <br /></td></tr>
+<tr class="memitem:a73af23bc34cc2956516495bbad5aae25" id="r_a73af23bc34cc2956516495bbad5aae25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a73af23bc34cc2956516495bbad5aae25">clear</a> (uint8_t devIdx)</td></tr>
+<tr class="memdesc:a73af23bc34cc2956516495bbad5aae25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear display buffer and hardware for one device.  <br /></td></tr>
 <tr class="memitem:a643a9d006b3db9d24472aaccbb21f956" id="r_a643a9d006b3db9d24472aaccbb21f956"><td class="memItemLeft" align="right" valign="top"><a id="a643a9d006b3db9d24472aaccbb21f956" name="a643a9d006b3db9d24472aaccbb21f956"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
 <tr class="memdesc:a643a9d006b3db9d24472aaccbb21f956"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear display buffers and hardware for all devices. <br /></td></tr>
-<tr class="memitem:a06c79776315fedd752e84129b00f3d70" id="r_a06c79776315fedd752e84129b00f3d70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a06c79776315fedd752e84129b00f3d70">setLed</a> (uint8_t device, uint8_t row, uint8_t col, bool state)</td></tr>
-<tr class="memdesc:a06c79776315fedd752e84129b00f3d70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state of a specific LED.  <br /></td></tr>
-<tr class="memitem:a7ea687bbe6d34183f81bee1f43171697" id="r_a7ea687bbe6d34183f81bee1f43171697"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ea687bbe6d34183f81bee1f43171697">getLed</a> (uint8_t _deviceIndex, uint8_t row, uint8_t col) const</td></tr>
-<tr class="memdesc:a7ea687bbe6d34183f81bee1f43171697"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the state of a specific LED from the internal buffer.  <br /></td></tr>
-<tr class="memitem:a264d8045cff8acb53dd1f320cfbf2c30" id="r_a264d8045cff8acb53dd1f320cfbf2c30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a264d8045cff8acb53dd1f320cfbf2c30">setRow</a> (uint8_t device, uint8_t row, uint8_t value)</td></tr>
-<tr class="memdesc:a264d8045cff8acb53dd1f320cfbf2c30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the entire row value for a specific device (buffer only).  <br /></td></tr>
-<tr class="memitem:aed1c041da8e1d7a956fc309a89310edd" id="r_aed1c041da8e1d7a956fc309a89310edd"><td class="memItemLeft" align="right" valign="top"><a id="aed1c041da8e1d7a956fc309a89310edd" name="aed1c041da8e1d7a956fc309a89310edd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> ()</td></tr>
-<tr class="memdesc:aed1c041da8e1d7a956fc309a89310edd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Push current buffer to all devices. <br /></td></tr>
-<tr class="memitem:aad467c31bcd085e020bba563b6f1695a" id="r_aad467c31bcd085e020bba563b6f1695a"><td class="memItemLeft" align="right" valign="top"><a id="aad467c31bcd085e020bba563b6f1695a" name="aad467c31bcd085e020bba563b6f1695a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t device)</td></tr>
+<tr class="memitem:ab5ade0c53165298fcf0b40b0f9a5b429" id="r_ab5ade0c53165298fcf0b40b0f9a5b429"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5ade0c53165298fcf0b40b0f9a5b429">setLed</a> (uint8_t devIdx, uint8_t rowIdx, uint8_t colIdx, bool state)</td></tr>
+<tr class="memdesc:ab5ade0c53165298fcf0b40b0f9a5b429"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state of a specific LED in the device’s internal matrix buffer.  <br /></td></tr>
+<tr class="memitem:ac23c52bed841193572396a8f570f34b4" id="r_ac23c52bed841193572396a8f570f34b4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac23c52bed841193572396a8f570f34b4">getLed</a> (uint8_t devIdx, uint8_t rowIdx, uint8_t colIdx) const</td></tr>
+<tr class="memdesc:ac23c52bed841193572396a8f570f34b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the state of a specific LED in the device’s internal matrix buffer.  <br /></td></tr>
+<tr class="memitem:af3c04678fffcd997afc594815db864ca" id="r_af3c04678fffcd997afc594815db864ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af3c04678fffcd997afc594815db864ca">setCol</a> (uint8_t devIdx, uint8_t colIdx, uint8_t value)</td></tr>
+<tr class="memdesc:af3c04678fffcd997afc594815db864ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the entire col value for a specific device (buffer only).  <br /></td></tr>
+<tr class="memitem:aed1c041da8e1d7a956fc309a89310edd" id="r_aed1c041da8e1d7a956fc309a89310edd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aed1c041da8e1d7a956fc309a89310edd">show</a> ()</td></tr>
+<tr class="memdesc:aed1c041da8e1d7a956fc309a89310edd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Push the internal display buffer to all connected devices.  <br /></td></tr>
+<tr class="memitem:a870293682ec1892b4d0387fbc3b384f1" id="r_a870293682ec1892b4d0387fbc3b384f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a870293682ec1892b4d0387fbc3b384f1">show</a> (uint8_t devIdx)</td></tr>
+<tr class="memdesc:a870293682ec1892b4d0387fbc3b384f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Push the internal display buffer to a specific device.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Controls multiple MAX7219/MAX7221 LED drivers via software SPI. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ab4da57b10e5240492cc0ee24dcd6b89a" name="ab4da57b10e5240492cc0ee24dcd6b89a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4da57b10e5240492cc0ee24dcd6b89a">&#9670;&#160;</a></span>SBK_MAX72xxSoft()</h2>
+<a id="a639dd8485fff8b0b57d432ea842c656f" name="a639dd8485fff8b0b57d432ea842c656f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a639dd8485fff8b0b57d432ea842c656f">&#9670;&#160;</a></span>SBK_MAX72xxSoft()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -155,7 +162,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>numDevices</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>&#160;)</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>devsNum</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -166,16 +173,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
     <tr><td class="paramname">dataPin</td><td>Data input pin (DIN) </td></tr>
     <tr><td class="paramname">clkPin</td><td>Clock pin (CLK) </td></tr>
     <tr><td class="paramname">csPin</td><td>Chip Select pin (CS) </td></tr>
-    <tr><td class="paramname">numDevices</td><td>Number of daisy-chained devices (max 8 recommended) </td></tr>
+    <tr><td class="paramname">devsNum</td><td>Number of daisy-chained MAX72xx devices (typically up to 8). Default is 1.</td></tr>
   </table>
   </dd>
 </dl>
+<p>Initializes internal display buffer for each device in the chain. Each device reserves 8 bytes — one for each digit line (DIG0–DIG7), representing columns (cathode outputs).</p>
+<dl class="section note"><dt>Note</dt><dd>Each byte in the buffer holds segment (SEG0–SEG7) values for one column. </dd></dl>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="aca55682cec0b07bfa7fc9c5ec6c42ec9" name="aca55682cec0b07bfa7fc9c5ec6c42ec9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca55682cec0b07bfa7fc9c5ec6c42ec9">&#9670;&#160;</a></span>clear()</h2>
+<a id="a73af23bc34cc2956516495bbad5aae25" name="a73af23bc34cc2956516495bbad5aae25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73af23bc34cc2956516495bbad5aae25">&#9670;&#160;</a></span>clear()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -183,7 +192,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
         <tr>
           <td class="memname">void SBK_MAX72xxSoft::clear </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>device</em></span></td><td>)</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>devIdx</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -192,15 +201,43 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
 <p>Clear display buffer and hardware for one device. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">device</td><td>Index of the target device. </td></tr>
+    <tr><td class="paramname">devIdx</td><td>Target device index. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a7ea687bbe6d34183f81bee1f43171697" name="a7ea687bbe6d34183f81bee1f43171697"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ea687bbe6d34183f81bee1f43171697">&#9670;&#160;</a></span>getLed()</h2>
+<a id="a161200948b6eaa69271424dd9b5d0640" name="a161200948b6eaa69271424dd9b5d0640"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a161200948b6eaa69271424dd9b5d0640">&#9670;&#160;</a></span>devsNum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t SBK_MAX72xxSoft::devsNum </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number of actives driver devices. </p>
+<dl class="section return"><dt>Returns</dt><dd>number of actives driver devices. </dd></dl>
+
+</div>
+</div>
+<a id="ac23c52bed841193572396a8f570f34b4" name="ac23c52bed841193572396a8f570f34b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac23c52bed841193572396a8f570f34b4">&#9670;&#160;</a></span>getLed()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -208,38 +245,142 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
         <tr>
           <td class="memname">bool SBK_MAX72xxSoft::getLed </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>_deviceIndex</em></span>, </td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>devIdx</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>row</em></span>, </td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>rowIdx</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>col</em></span>&#160;) const</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>colIdx</em></span>&#160;) const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get the state of a specific LED from the internal buffer. </p>
+<p>Get the state of a specific LED in the device’s internal matrix buffer. </p>
 <p>This function reads the last known state of a given LED at the specified row and column on a target device. It does not access the physical display hardware, but instead reads from the internal RAM buffer used for batching updates.</p>
-<dl class="section note"><dt>Note</dt><dd>This function may not reflect real-time display contents unless <span class="tt"><a class="el" href="#aed1c041da8e1d7a956fc309a89310edd" title="Push current buffer to all devices.">show()</a></span> has been called after <span class="tt"><a class="el" href="#a06c79776315fedd752e84129b00f3d70" title="Set the state of a specific LED.">setLed()</a></span>. For animations or state-dependent logic, ensure consistency by calling <span class="tt"><a class="el" href="#aed1c041da8e1d7a956fc309a89310edd" title="Push current buffer to all devices.">show()</a></span> regularly.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function may not reflect real-time display contents unless <span class="tt"><a class="el" href="#aed1c041da8e1d7a956fc309a89310edd" title="Push the internal display buffer to all connected devices.">show()</a></span> has been called after <span class="tt"><a class="el" href="#ab5ade0c53165298fcf0b40b0f9a5b429" title="Set the state of a specific LED in the device’s internal matrix buffer.">setLed()</a></span>. For animations or state-dependent logic, ensure consistency by calling <span class="tt"><a class="el" href="#aed1c041da8e1d7a956fc309a89310edd" title="Push the internal display buffer to all connected devices.">show()</a></span> regularly.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">device</td><td>Index of the target device (0-based). </td></tr>
-    <tr><td class="paramname">row</td><td>Row index (0–7). </td></tr>
-    <tr><td class="paramname">col</td><td>Column index (0–7). </td></tr>
+    <tr><td class="paramname">devIdx</td><td>Index of the target device (0-based). </td></tr>
+    <tr><td class="paramname">rowIdx</td><td>Row index (0–7). </td></tr>
+    <tr><td class="paramname">colIdx</td><td>Column index (0–7). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the LED is currently set ON in the buffer, false if OFF or invalid. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the LED is currently set ON in the buffer, false if OFF or invalid.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The coordinate system follows a standard [row, col] layout. For MAX72xx drivers:<ul>
+<li>row corresponds to SEGx (segment outputs, V+ source = anode)</li>
+<li>col corresponds to DIGx (digit selectors, GND sink = cathode) </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
-<a id="ad95f648d9e66e841f0e8ccd9e0fc3e28" name="ad95f648d9e66e841f0e8ccd9e0fc3e28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad95f648d9e66e841f0e8ccd9e0fc3e28">&#9670;&#160;</a></span>setBrightness()</h2>
+<a id="a50f31d36de1762dcea7e6a0fe932f5b7" name="a50f31d36de1762dcea7e6a0fe932f5b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50f31d36de1762dcea7e6a0fe932f5b7">&#9670;&#160;</a></span>maxColumns()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t SBK_MAX72xxSoft::maxColumns </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of addressable columns (cathode outputs = DIGx). </p>
+<p>This is a fixed value of 8 for MAX7219/7221, since each digit line (DIG0–DIG7) selects one column (cathode). Each DIGx line maps to one 8-bit buffer entry representing the vertical SEGx lines.</p>
+<dl class="section return"><dt>Returns</dt><dd>Number of columns (DIGx = cathode outputs), always 8 for MAX7219/7221. </dd></dl>
+
+</div>
+</div>
+<a id="a609ed97e74532c1545f7232d14b01ea1" name="a609ed97e74532c1545f7232d14b01ea1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a609ed97e74532c1545f7232d14b01ea1">&#9670;&#160;</a></span>maxRows()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t SBK_MAX72xxSoft::maxRows </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>devIdx</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of addressable row lines (anode outputs = SEGx). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">devIdx</td><td>Index of the target device (0-based in daisy chain). This parameter is ignored for MAX7219/7221 chips, but included for API compatibility with SBK_BarDrive.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>For MAX7219/7221 drivers, this value is always 8, since each column (DIGx) can display up to 8 vertical segments connected to SEG0–SEG7 (anode lines).</p>
+<dl class="section return"><dt>Returns</dt><dd>Number of row lines (SEGx/anodes), always 8 for MAX72xx devices. </dd></dl>
+
+</div>
+</div>
+<a id="a7008f00653f3619334291dda4ce760f2" name="a7008f00653f3619334291dda4ce760f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7008f00653f3619334291dda4ce760f2">&#9670;&#160;</a></span>maxSegments()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t SBK_MAX72xxSoft::maxSegments </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>devIdx</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the total number of addressable LED segments for this device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">devIdx</td><td>Index of the target device (0-based in daisy chain). This parameter is ignored for MAX7219/7221 chips, but is included for API compatibility with SBK_BarDrive.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This value is computed as: <span class="tt">maxRows(devIdx) × <a class="el" href="#a50f31d36de1762dcea7e6a0fe932f5b7" title="Returns the number of addressable columns (cathode outputs = DIGx).">maxColumns()</a></span> For MAX7219/7221, this is always 8 × 8 = 64 segments per device.</p>
+<dl class="section return"><dt>Returns</dt><dd>Total number of addressable LED segments (pixels) for this device. </dd></dl>
+
+</div>
+</div>
+<a id="a72b7191d6728f64ac314ec1bf6e619b6" name="a72b7191d6728f64ac314ec1bf6e619b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72b7191d6728f64ac314ec1bf6e619b6">&#9670;&#160;</a></span>setBrightness()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -247,7 +388,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
         <tr>
           <td class="memname">void SBK_MAX72xxSoft::setBrightness </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>device</em></span>, </td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>devIdx</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -260,7 +401,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
 <p>Set display brightness for a specific device. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">device</td><td>Index of the target device. </td></tr>
+    <tr><td class="paramname">devIdx</td><td>Target device index. </td></tr>
     <tr><td class="paramname">brightness</td><td>Value from 0 (min) to 15 (max). </td></tr>
   </table>
   </dd>
@@ -268,63 +409,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
 
 </div>
 </div>
-<a id="a06c79776315fedd752e84129b00f3d70" name="a06c79776315fedd752e84129b00f3d70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06c79776315fedd752e84129b00f3d70">&#9670;&#160;</a></span>setLed()</h2>
+<a id="af3c04678fffcd997afc594815db864ca" name="af3c04678fffcd997afc594815db864ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3c04678fffcd997afc594815db864ca">&#9670;&#160;</a></span>setCol()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void SBK_MAX72xxSoft::setLed </td>
+          <td class="memname">void SBK_MAX72xxSoft::setCol </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>device</em></span>, </td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>devIdx</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>row</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>col</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>state</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set the state of a specific LED. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">device</td><td>Index of the target device. </td></tr>
-    <tr><td class="paramname">row</td><td>Row number (0 to 7). </td></tr>
-    <tr><td class="paramname">col</td><td>Column number (0 to 7). </td></tr>
-    <tr><td class="paramname">state</td><td>true = ON, false = OFF. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a264d8045cff8acb53dd1f320cfbf2c30" name="a264d8045cff8acb53dd1f320cfbf2c30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a264d8045cff8acb53dd1f320cfbf2c30">&#9670;&#160;</a></span>setRow()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SBK_MAX72xxSoft::setRow </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>device</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>row</em></span>, </td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>colIdx</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -334,11 +433,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
       </table>
 </div><div class="memdoc">
 
-<p>Set the entire row value for a specific device (buffer only). </p>
+<p>Set the entire col value for a specific device (buffer only). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">device</td><td>Index of the target device. </td></tr>
-    <tr><td class="paramname">row</td><td>Row number (0 to 7). </td></tr>
+    <tr><td class="paramname">devIdx</td><td>Index of the target device. </td></tr>
+    <tr><td class="paramname">colIdx</td><td>Column number (0 to 7). </td></tr>
     <tr><td class="paramname">value</td><td>8-bit value for the row. </td></tr>
   </table>
   </dd>
@@ -346,8 +445,56 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
 
 </div>
 </div>
-<a id="a06f97a77c4d959033153060a57d5f2eb" name="a06f97a77c4d959033153060a57d5f2eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06f97a77c4d959033153060a57d5f2eb">&#9670;&#160;</a></span>setScanLimit()</h2>
+<a id="ab5ade0c53165298fcf0b40b0f9a5b429" name="ab5ade0c53165298fcf0b40b0f9a5b429"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5ade0c53165298fcf0b40b0f9a5b429">&#9670;&#160;</a></span>setLed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SBK_MAX72xxSoft::setLed </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>devIdx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>rowIdx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>colIdx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>state</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the state of a specific LED in the device’s internal matrix buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">devIdx</td><td>Index of the target device (0-based in daisy chain). </td></tr>
+    <tr><td class="paramname">rowIdx</td><td>Logical rowIdx index (0 to maxRows(_devIdx) - 1) — vertical position (anode). </td></tr>
+    <tr><td class="paramname">colIdx</td><td>Logical column index (0 to <a class="el" href="#a50f31d36de1762dcea7e6a0fe932f5b7" title="Returns the number of addressable columns (cathode outputs = DIGx).">maxColumns()</a> - 1) — horizontal position (cathode). </td></tr>
+    <tr><td class="paramname">state</td><td>true = LED ON, false = LED OFF.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The coordinate system follows a standard [row, col] layout. For MAX72xx drivers:<ul>
+<li>row corresponds to SEGx (segment outputs, V+ source = anode)</li>
+<li>col corresponds to DIGx (digit selectors, GND sink = cathode)</li>
+</ul>
+</dd></dl>
+<p>This function updates the internal buffer; call <a class="el" href="#aed1c041da8e1d7a956fc309a89310edd" title="Push the internal display buffer to all connected devices.">show()</a> to apply changes to hardware. </p>
+
+</div>
+</div>
+<a id="ab7ee1b7ff3551f1eb4380b8f6f7aefca" name="ab7ee1b7ff3551f1eb4380b8f6f7aefca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7ee1b7ff3551f1eb4380b8f6f7aefca">&#9670;&#160;</a></span>setScanLimit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -355,7 +502,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
         <tr>
           <td class="memname">void SBK_MAX72xxSoft::setScanLimit </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>device</em></span>, </td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>devIdx</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -368,7 +515,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
 <p>Set the scan limit (number of active digits) for a specific device. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">device</td><td>Index of the target device. </td></tr>
+    <tr><td class="paramname">devIdx</td><td>Target device index. </td></tr>
     <tr><td class="paramname">limit</td><td>Value from 0 to 7. </td></tr>
   </table>
   </dd>
@@ -376,8 +523,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
 
 </div>
 </div>
-<a id="ab4d05c43588457d164fe3a589f155ad2" name="ab4d05c43588457d164fe3a589f155ad2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4d05c43588457d164fe3a589f155ad2">&#9670;&#160;</a></span>setShutdown()</h2>
+<a id="a56ba9d7961fae9aac1f90e93219437ff" name="a56ba9d7961fae9aac1f90e93219437ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56ba9d7961fae9aac1f90e93219437ff">&#9670;&#160;</a></span>setShutdown()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -385,7 +532,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
         <tr>
           <td class="memname">void SBK_MAX72xxSoft::setShutdown </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>device</em></span>, </td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>devIdx</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -398,7 +545,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
 <p>Enable or disable shutdown mode on a specific device. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">device</td><td>Index of the target device. </td></tr>
+    <tr><td class="paramname">devIdx</td><td>Index of the target device. </td></tr>
     <tr><td class="paramname">status</td><td>false = shutdown, true = normal operation </td></tr>
   </table>
   </dd>
@@ -406,9 +553,57 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> (uint8_t dev
 
 </div>
 </div>
+<a id="aed1c041da8e1d7a956fc309a89310edd" name="aed1c041da8e1d7a956fc309a89310edd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed1c041da8e1d7a956fc309a89310edd">&#9670;&#160;</a></span>show() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SBK_MAX72xxSoft::show </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Push the internal display buffer to all connected devices. </p>
+<p>This flushes all buffered LED states to the physical hardware for every device managed by this driver instance. Use this after making multiple <span class="tt"><a class="el" href="#ab5ade0c53165298fcf0b40b0f9a5b429" title="Set the state of a specific LED in the device’s internal matrix buffer.">setLed()</a></span> calls to apply the changes to the display.</p>
+<p>Typically used in split-device or multi-bar meter setups. </p>
+
+</div>
+</div>
+<a id="a870293682ec1892b4d0387fbc3b384f1" name="a870293682ec1892b4d0387fbc3b384f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a870293682ec1892b4d0387fbc3b384f1">&#9670;&#160;</a></span>show() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SBK_MAX72xxSoft::show </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>devIdx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Push the internal display buffer to a specific device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">devIdx</td><td>Index of the target device (0-based in the daisy chain).</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Only the specified device's display will be updated. Useful for optimized partial updates when only one device has changed.</p>
+<dl class="section note"><dt>Note</dt><dd>The driver must track changes correctly for this to be meaningful. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Users/sbara/OneDrive/Samuel - personnel/Electronics/Arduino/Sketches/libraries/SBK_MAX72xx/src/<a class="el" href="_s_b_k___m_a_x72xx_soft_8h_source.html">SBK_MAX72xxSoft.h</a></li>
-<li>C:/Users/sbara/OneDrive/Samuel - personnel/Electronics/Arduino/Sketches/libraries/SBK_MAX72xx/src/<a class="el" href="_s_b_k___m_a_x72xx_soft_8cpp.html">SBK_MAX72xxSoft.cpp</a></li>
+<li>C:/Users/sbara/OneDrive/Documents/GitHub/SBK_MAX72xx/src/<a class="el" href="_s_b_k___m_a_x72xx_soft_8h_source.html">SBK_MAX72xxSoft.h</a></li>
+<li>C:/Users/sbara/OneDrive/Documents/GitHub/SBK_MAX72xx/src/<a class="el" href="_s_b_k___m_a_x72xx_soft_8cpp.html">SBK_MAX72xxSoft.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

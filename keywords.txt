@@ -5,10 +5,15 @@ clear               KEYWORD2
 show                KEYWORD2
 setLed              KEYWORD2
 getLed              KEYWORD2
+setCol              KEYWORD2
 setRow              KEYWORD2
 setBrightness       KEYWORD2
 setShutdown         KEYWORD2
 setScanLimit        KEYWORD2
+devsNum             KEYWORD2
+maxRows             KEYWORD2
+maxColumns          KEYWORD2
+maxSegments         KEYWORD2
 
 # Hardware SPI Driver
 SBK_MAX72xxHard     KEYWORD1
@@ -17,9 +22,14 @@ clear               KEYWORD2
 show                KEYWORD2
 setLed              KEYWORD2
 getLed              KEYWORD2
+setCol              KEYWORD2
 setRow              KEYWORD2
 setBrightness       KEYWORD2
 setShutdown         KEYWORD2
 setScanLimit        KEYWORD2
 setSPIClock         KEYWORD2
 end                 KEYWORD2
+devsNum             KEYWORD2
+maxRows             KEYWORD2
+maxColumns          KEYWORD2
+maxSegments         KEYWORD2

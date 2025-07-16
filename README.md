@@ -4,6 +4,18 @@ Arduino-compatible driver for controlling MAX7219/MAX7221 LED matrix chips. Supp
 
 ---
 
+## 🆕 What’s New in Version 2.0
+
+- 🔁 Unified API between software (`SBK_MAX72xxSoft`) and hardware (`SBK_MAX72xxHard`) drivers.
+- 🧠 Internal display buffer system with optimized update logic.
+- 🔌 Full compatibility with [`SBK_BarDrive`](https://github.com/sbarabe/SBK_BarDrive) for animated bar meters and matrix effects.
+- 🧱 Clean C++ class interface with public access to maxRows(), maxColumns(), maxSegments(), and devsNum().
+- 💡 Optional per-device `show(devIdx)` for efficient partial updates.
+
+> **Note:** All **version 1.x.x** releases are **deprecated**. Please migrate to version 2.0+ for full feature support and long-term maintenance.
+
+---
+
 ## ✅ Features
 
 * Supports both **hardware SPI** (`SBK_MAX72xxHard`) and **software SPI** (`SBK_MAX72xxSoft`)
@@ -108,6 +120,11 @@ void loop() {
 | `setShutdown()`   | Enable or disable a device             |
 | `show()`          | Push buffer content to all devices     |
 | `show(device)`    | Push buffer content to specific device |
+| `devsNum()`       | Return number of active devices        |
+| `maxRows(device)` | Always returns 8 (API wrapper)         |
+| `maxColumns()`    | Always returns 8                       |
+| `maxSegments(dev)`| Always returns 64 (8 × 8)(API wrapper) |
+
 
 ### Additional (Hardware SPI Only)
 

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['_7esbk_5fmax72xxhard_0',['~SBK_MAX72xxHard',['../class_s_b_k___m_a_x72xx_hard.html#aea7a7ebddb5334b57383fbd85eb3fc51',1,'SBK_MAX72xxHard']]],
-  ['_7esbk_5fmax72xxsoft_1',['~SBK_MAX72xxSoft',['../class_s_b_k___m_a_x72xx_soft.html#a29d2de6525d7816dd15271d48c4db27a',1,'SBK_MAX72xxSoft']]]
+  ['getled_0',['getLed',['../class_s_b_k___m_a_x72xx_hard.html#a44341e63143fa650ba7011217ebbded7',1,'SBK_MAX72xxHard::getLed()'],['../class_s_b_k___m_a_x72xx_soft.html#ac23c52bed841193572396a8f570f34b4',1,'SBK_MAX72xxSoft::getLed()']]]
 ];

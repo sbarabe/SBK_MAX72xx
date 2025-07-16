@@ -9,14 +9,14 @@
  * It supports setting individual LEDs, rows, brightness, shutdown mode, and clearing displays
  * for one or multiple devices.
  *
- * It includes a per-device display buffer for efficient batch updates.
+
  *
  * @example examples/simpleDemo/simpleDemo.ino
  *
  * @author
  * Samuel Barabé (Smart Builds & Kits)
  *
- * @version 1.0.0
+ * @version 2.0.0
  *
  * @license MIT
  *
@@ -54,14 +54,62 @@ public:
     /**
      * @brief Construct a new Software SPI SBK_MAX72xxSoft object.
      *
-     * @param dataPin  Data input pin (DIN)
-     * @param clkPin   Clock pin (CLK)
-     * @param csPin    Chip Select pin (CS)
-     * @param numDevices Number of daisy-chained devices (max 8 recommended)
+     * @param dataPin     Data input pin (DIN)
+     * @param clkPin      Clock pin (CLK)
+     * @param csPin       Chip Select pin (CS)
+     * @param devsNum     Number of daisy-chained MAX72xx devices (typically up to 8). Default is 1.
+     *
+     * Initializes internal display buffer for each device in the chain.
+     * Each device reserves 8 bytes — one for each digit line (DIG0–DIG7), representing columns (cathode outputs).
+     *
+     * @note Each byte in the buffer holds segment (SEG0–SEG7) values for one column.
      */
-    SBK_MAX72xxSoft(uint8_t dataPin, uint8_t clkPin, uint8_t csPin, uint8_t numDevices = 1);
+    SBK_MAX72xxSoft(uint8_t dataPin, uint8_t clkPin, uint8_t csPin, uint8_t devsNum = 1);
 
     ~SBK_MAX72xxSoft(); // Destructor
+
+    /**
+     * @brief Returns the number of addressable row lines (anode outputs = SEGx).
+     *
+     * @param devIdx Index of the target device (0-based in daisy chain).
+     *               This parameter is ignored for MAX7219/7221 chips,
+     *               but included for API compatibility with SBK_BarDrive.
+     *
+     * For MAX7219/7221 drivers, this value is always 8, since each column (DIGx)
+     * can display up to 8 vertical segments connected to SEG0–SEG7 (anode lines).
+     *
+     * @return Number of row lines (SEGx/anodes), always 8 for MAX72xx devices.
+     */
+    uint8_t maxRows(uint8_t devIdx = 0) const
+    {
+        (void)devIdx;
+        return _defaultRowBufferSize;
+    }
+
+    /**
+     * @brief Returns the number of addressable columns (cathode outputs = DIGx).
+     *
+     * This is a fixed value of 8 for MAX7219/7221, since each digit line (DIG0–DIG7) selects one column (cathode).
+     * Each DIGx line maps to one 8-bit buffer entry representing the vertical SEGx lines.
+     *
+     * @return Number of columns (DIGx = cathode outputs), always 8 for MAX7219/7221.
+     */
+    uint8_t maxColumns() const { return _defaultColBufferSize; }
+
+    /**
+     * @brief Returns the total number of addressable LED segments for this device.
+     *
+     * @param devIdx Index of the target device (0-based in daisy chain).
+     *               This parameter is ignored for MAX7219/7221 chips,
+     *               but is included for API compatibility with SBK_BarDrive.
+     *
+     * This value is computed as:
+     * `maxRows(devIdx) × maxColumns()`
+     * For MAX7219/7221, this is always 8 × 8 = 64 segments per device.
+     *
+     * @return Total number of addressable LED segments (pixels) for this device.
+     */
+    uint8_t maxSegments(uint8_t devIdx = 0) const { return maxRows(devIdx) * maxColumns(); }
 
     /**
      * @brief Initialize SPI pins and all MAX72xx chips.
@@ -71,33 +119,40 @@ public:
     /**
      * @brief Enable or disable shutdown mode on a specific device.
      *
-     * @param device Index of the target device.
+     * @param devIdx Index of the target device.
      * @param status false = shutdown, true = normal operation
      */
-    void setShutdown(uint8_t device, bool status);
+    void setShutdown(uint8_t devIdx, bool status);
 
     /**
      * @brief Set the scan limit (number of active digits) for a specific device.
      *
-     * @param device Index of the target device.
+     * @param devIdx Target device index.
      * @param limit  Value from 0 to 7.
      */
-    void setScanLimit(uint8_t device, uint8_t limit);
+    void setScanLimit(uint8_t devIdx, uint8_t limit);
 
     /**
      * @brief Set display brightness for a specific device.
      *
-     * @param device Index of the target device.
+     * @param devIdx Target device index.
      * @param brightness Value from 0 (min) to 15 (max).
      */
-    void setBrightness(uint8_t device, uint8_t brightness);
+    void setBrightness(uint8_t devIdx, uint8_t brightness);
+
+    /**
+     * @brief Return the number of actives driver devices.
+     *
+     * @return number of actives driver devices.
+     */
+    uint8_t devsNum() const { return _devsNum; }
 
     /**
      * @brief Clear display buffer and hardware for one device.
      *
-     * @param device Index of the target device.
+     * @param devIdx Target device index.
      */
-    void clear(uint8_t device);
+    void clear(uint8_t devIdx);
 
     /**
      * @brief Clear display buffers and hardware for all devices.
@@ -105,17 +160,24 @@ public:
     void clear();
 
     /**
-     * @brief Set the state of a specific LED.
+     * @brief Set the state of a specific LED in the device’s internal matrix buffer.
      *
-     * @param device Index of the target device.
-     * @param row    Row number (0 to 7).
-     * @param col    Column number (0 to 7).
-     * @param state  true = ON, false = OFF.
+     * @param devIdx    Index of the target device (0-based in daisy chain).
+     * @param rowIdx    Logical rowIdx index (0 to maxRows(_devIdx) - 1) — vertical position (anode).
+     * @param colIdx    Logical column index (0 to maxColumns() - 1) — horizontal position (cathode).
+     * @param state     true = LED ON, false = LED OFF.
+     *
+     * @note The coordinate system follows a standard [row, col] layout.
+     *       For MAX72xx drivers:
+     *         - row corresponds to SEGx (segment outputs, V+ source = anode)
+     *         - col corresponds to DIGx (digit selectors, GND sink = cathode)
+     *
+     * This function updates the internal buffer; call show() to apply changes to hardware.
      */
-    void setLed(uint8_t device, uint8_t row, uint8_t col, bool state);
+    void setLed(uint8_t devIdx, uint8_t rowIdx, uint8_t colIdx, bool state);
 
     /**
-     * @brief Get the state of a specific LED from the internal buffer.
+     * @brief Get the state of a specific LED in the device’s internal matrix buffer.
      *
      * This function reads the last known state of a given LED at the specified row and column
      * on a target device. It does not access the physical display hardware, but instead reads from
@@ -124,37 +186,63 @@ public:
      * @note This function may not reflect real-time display contents unless `show()` has been called
      * after `setLed()`. For animations or state-dependent logic, ensure consistency by calling `show()` regularly.
      *
-     * @param device Index of the target device (0-based).
-     * @param row Row index (0–7).
-     * @param col Column index (0–7).
+     * @param devIdx Index of the target device (0-based).
+     * @param rowIdx Row index (0–7).
+     * @param colIdx Column index (0–7).
      * @return true if the LED is currently set ON in the buffer, false if OFF or invalid.
-     */
-    bool getLed(uint8_t _deviceIndex, uint8_t row, uint8_t col) const;
-
-    /**
-     * @brief Set the entire row value for a specific device (buffer only).
      *
-     * @param device Index of the target device.
-     * @param row    Row number (0 to 7).
-     * @param value  8-bit value for the row.
+     * @note The coordinate system follows a standard [row, col] layout.
+     *       For MAX72xx drivers:
+     *         - row corresponds to SEGx (segment outputs, V+ source = anode)
+     *         - col corresponds to DIGx (digit selectors, GND sink = cathode)
      */
-    void setRow(uint8_t device, uint8_t row, uint8_t value);
+    bool getLed(uint8_t devIdx, uint8_t rowIdx, uint8_t colIdx) const;
 
     /**
-     * @brief Push current buffer to all devices.
+     * @brief Set the entire col value for a specific device (buffer only).
+     *
+     * @param devIdx    Index of the target device.
+     * @param colIdx    Column number (0 to 7).
+     * @param value     8-bit value for the row.
+     */
+    void setCol(uint8_t devIdx, uint8_t colIdx, uint8_t value);
+
+    /**
+     * @brief Push the internal display buffer to all connected devices.
+     *
+     * This flushes all buffered LED states to the physical hardware for every device
+     * managed by this driver instance. Use this after making multiple `setLed()` calls
+     * to apply the changes to the display.
+     *
+     * Typically used in split-device or multi-bar meter setups.
      */
     void show();
-    void show(uint8_t device);
+
+    /**
+     * @brief Push the internal display buffer to a specific device.
+     *
+     * @param devIdx Index of the target device (0-based in the daisy chain).
+     *
+     * Only the specified device's display will be updated. Useful for optimized
+     * partial updates when only one device has changed.
+     *
+     * @note The driver must track changes correctly for this to be meaningful.
+     */
+    void show(uint8_t devIdx);
 
 private:
-    void spiTransfer(uint8_t targetDevice, uint8_t opcode, uint8_t data);
-    void _writeRowToAllDevices(uint8_t targetDevice, uint8_t row, uint8_t data);
+    void _spiTransfer(uint8_t targetDevice, uint8_t opcode, uint8_t data);
+    void _writeColToAllDevices(uint8_t targetDevice, uint8_t colIdx, uint8_t data);
+    inline uint8_t _bitMaskRow(uint8_t devIdx, uint8_t rowIdx) const;
+    inline uint8_t _colIndex(uint8_t devIdx, uint8_t colIdx) const;
 
     const uint8_t _dataPin;
     const uint8_t _clkPin;
     const uint8_t _csPin;
-    const uint8_t _numDevices;
+    const uint8_t _devsNum = 1;
 
+    static constexpr uint8_t _defaultRowBufferSize = 8;
+    static constexpr uint8_t _defaultColBufferSize = 8;
     uint8_t *_buffer; // Internal display buffer
     bool *_update;    // Array to track if data has changed per device
 

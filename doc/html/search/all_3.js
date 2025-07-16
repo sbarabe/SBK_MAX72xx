@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['getled_0',['getLed',['../class_s_b_k___m_a_x72xx_hard.html#ab77c681008809573d7d8618cbe4e9262',1,'SBK_MAX72xxHard::getLed()'],['../class_s_b_k___m_a_x72xx_soft.html#a7ea687bbe6d34183f81bee1f43171697',1,'SBK_MAX72xxSoft::getLed()']]]
+  ['devsnum_0',['devsNum',['../class_s_b_k___m_a_x72xx_hard.html#a2d81cc958dee5bcf760faca0cecd2946',1,'SBK_MAX72xxHard::devsNum()'],['../class_s_b_k___m_a_x72xx_soft.html#a161200948b6eaa69271424dd9b5d0640',1,'SBK_MAX72xxSoft::devsNum()']]]
 ];

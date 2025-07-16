@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['clear_0',['clear',['../class_s_b_k___m_a_x72xx_hard.html#a67fd6329842beab251939810ba806146',1,'SBK_MAX72xxHard::clear(uint8_t device)'],['../class_s_b_k___m_a_x72xx_hard.html#a2fc9df954fec8530583e3d62873ca5ef',1,'SBK_MAX72xxHard::clear()'],['../class_s_b_k___m_a_x72xx_soft.html#aca55682cec0b07bfa7fc9c5ec6c42ec9',1,'SBK_MAX72xxSoft::clear(uint8_t device)'],['../class_s_b_k___m_a_x72xx_soft.html#a643a9d006b3db9d24472aaccbb21f956',1,'SBK_MAX72xxSoft::clear()']]]
+  ['clear_0',['clear',['../class_s_b_k___m_a_x72xx_hard.html#af567375a3941263f2c29b9a693598944',1,'SBK_MAX72xxHard::clear(uint8_t devIdx)'],['../class_s_b_k___m_a_x72xx_hard.html#a2fc9df954fec8530583e3d62873ca5ef',1,'SBK_MAX72xxHard::clear()'],['../class_s_b_k___m_a_x72xx_soft.html#a73af23bc34cc2956516495bbad5aae25',1,'SBK_MAX72xxSoft::clear(uint8_t devIdx)'],['../class_s_b_k___m_a_x72xx_soft.html#a643a9d006b3db9d24472aaccbb21f956',1,'SBK_MAX72xxSoft::clear()']]]
 ];
