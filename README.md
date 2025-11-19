@@ -4,7 +4,7 @@ Arduino-compatible driver for controlling MAX7219/MAX7221 LED matrix chips. Supp
 
 ---
 
-## 🆕 What’s New in Version 2.0.2
+## 🆕 What’s New in Version 2.0.3
 
 - MAX7219/7221 display test mode is now explicitly disabled in the `begin()` function to help stabilize the start-up sequence and prevent the device from accidentally falling into test mode.
 - New functions `testMode(dev, enable)` and `testMode(enable)` can be used after `begin()` (e.g. in `setup()` or `loop()`) to manually enable or disable the test mode when needed.
