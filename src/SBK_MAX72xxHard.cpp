@@ -11,7 +11,7 @@
  * @author
  * Samuel Barabé (Smart Builds & Kits)
  *
- * @version 2.0.0
+ * @version 2.0.1
  *
  * @license MIT
  *
@@ -77,6 +77,7 @@ void SBK_MAX72xxHard::begin()
         setShutdown(i, false);             // Wake up
         setScanLimit(i, maxColumns() - 1); // Display all 8 digits
         _spiTransfer(i, OP_DECODEMODE, 0); // No decode
+        testMode(i, false);                // <-- NEW: ensure test mode is OFF
         clear(i);                          // Clear display
         setBrightness(i, 8);               // Medium brightness
     }
@@ -198,6 +199,16 @@ void SBK_MAX72xxHard::show(uint8_t devIdx)
     }
     _update[devIdx] = false;
     SPI.endTransaction(); // 💡 Restores SPI state for other users
+}
+
+void SBK_MAX72xxHard::testMode(uint8_t devIdx, bool enable)
+{
+    if (devIdx >= _devsNum)
+        return;
+
+    // MAX7219 test mode uses register 0x0F
+    // value 1 = test ON (all segments), 0 = test OFF
+    _spiTransfer(devIdx, OP_DISPLAYTEST, enable ? 1 : 0);
 }
 
 void SBK_MAX72xxHard::_spiTransfer(uint8_t targetDevice, uint8_t opcode, uint8_t data)

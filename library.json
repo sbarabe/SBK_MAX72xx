@@ -1,6 +1,6 @@
 {
   "name": "SBK_MAX72xx",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "MAX7219/MAX7221 LED matrix driver with software and hardware SPI support.",
   "keywords": [
     "led",

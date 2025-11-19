@@ -16,7 +16,7 @@
  * @author
  * Samuel Barabé (Smart Builds & Kits)
  *
- * @version 2.0.0
+ * @version 2.0.1
  *
  * @license MIT
  *
@@ -229,6 +229,23 @@ public:
      * @note The driver must track changes correctly for this to be meaningful.
      */
     void show(uint8_t devIdx);
+
+    /**
+     * @brief Enable/disable display-test mode on all devices.
+     */
+    void testMode(bool enable)
+    {
+        for (uint8_t i = 0; i < _devsNum; i++)
+            testMode(i, enable);
+    }
+
+    /**
+     * @brief Enable or disable the MAX72xx display test mode.
+     *
+     * @param devIdx Target device index (0-based)
+     * @param enable true = enable test mode (all LEDs ON), false = disable
+     */
+    void testMode(uint8_t devIdx, bool enable);
 
 private:
     void _spiTransfer(uint8_t targetDevice, uint8_t opcode, uint8_t data);
