@@ -11,7 +11,7 @@
  * @author
  * Samuel Barabé (Smart Builds & Kits)
  *
- * @version 2.0.3
+ * @version 2.0.4
  *
  * @license MIT
  *
@@ -60,9 +60,12 @@ SBK_MAX72xxSoft::~SBK_MAX72xxSoft()
 void SBK_MAX72xxSoft::begin()
 {
     pinMode(_csPin, OUTPUT);
-    digitalWrite(_csPin, HIGH);
+    digitalWrite(_csPin, HIGH); // ensure chip deselected early
     pinMode(_dataPin, OUTPUT);
+    digitalWrite(_dataPin, LOW);
     pinMode(_clkPin, OUTPUT);
+    digitalWrite(_clkPin, LOW);
+    delay(50); // small stabilization delay
 
     for (uint8_t i = 0; i < _devsNum; ++i)
     {

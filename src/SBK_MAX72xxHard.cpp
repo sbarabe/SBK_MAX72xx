@@ -11,7 +11,7 @@
  * @author
  * Samuel Barabé (Smart Builds & Kits)
  *
- * @version 2.0.3
+ * @version 2.0.4
  *
  * @license MIT
  *
@@ -68,9 +68,10 @@ SBK_MAX72xxHard::~SBK_MAX72xxHard()
 void SBK_MAX72xxHard::begin()
 {
     pinMode(_csPin, OUTPUT);
-    digitalWrite(_csPin, HIGH);
-
+    digitalWrite(_csPin, HIGH); // ensure chip deselected early
     SPI.begin();
+    delay(50); // small stabilization delay
+
     SPI.beginTransaction(SPISettings(_spiClock, MSBFIRST, SPI_MODE0)); // You can tune speed
     for (uint8_t i = 0; i < _devsNum; ++i)
     {
